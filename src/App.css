@@ -1,0 +1,118 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.emoji-wrapper {
+  list-style: none;
+  width: 800px;
+  margin: 0 auto;
+
+}
+
+.emoji-wrapper li {
+  display: inline-block;
+  width: auto;
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+  
+}
+
+.emoji-wrapper li div {
+  font-size: 19px;
+  padding: 2px 7px;
+}
+
+.emoji-wrapper li:hover {
+  background: #f5f5f5;
+}
+
+#myRev {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.copy-emoji {
+  background: rgb(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 25px;
+  display: block;
+  border-radius: 50px;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+}
+
+span.copy-emoji.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.emoji-header-wrap {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 12px 0;
+
+}
+
+.search-field {
+  flex-basis: 82%;
+
+}
+
+.search-field input[type="search"] {
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  display: block;
+  width: 100%;
+  outline: none;
+}
+
+.loadmore {
+  cursor: pointer;
+
+}
