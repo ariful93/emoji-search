@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import LoadingItem from './components/LoadingItem';
 
 function App() {
   const emojiPerItem = 200
@@ -52,60 +53,77 @@ function App() {
                 />
           </div>
         </div>
+        
         {
           searchItem?.length > 0 ?
             <>
               <span className={`copy-emoji ${copyEmoji ? "active" : ""}`}> Copied!</span>
               {
-                searchEmoji !== null ? 
-                searchEmoji && searchEmoji.map( ( searchItem, index ) => {
-                    return(
-                      <li key={index} className='emoji-item' title={ searchItem.unicodeName }>
-                        <input
-                          type="hidden"
-                          value={ searchItem.character }
-                          readOnly
-                        />
-                        <CopyToClipboard
-                          text={searchItem.character}
-                          onCopy={ handleCopyEmoji }
-                        >
-                          <div>{ searchItem.character }</div>
-                        </CopyToClipboard>
-                      </li>
-                    )
-                  })
-                : 
-                  <h3>No Results</h3>
+                searchEmoji?.length > 0 ? 
+                <>
+                  {
+                    searchEmoji !== null ? 
+                    searchEmoji && searchEmoji.map( ( searchItem, index ) => {
+                        return(
+                          <li key={index} className='emoji-item' title={ searchItem.unicodeName }>
+                            <input
+                              type="hidden"
+                              value={ searchItem.character }
+                              readOnly
+                            />
+                            <CopyToClipboard
+                              text={searchItem.character}
+                              onCopy={ handleCopyEmoji }
+                            >
+                              <div>{ searchItem.character }</div>
+                            </CopyToClipboard>
+                          </li>
+                        )
+                      })
+                    : 
+                      <h3>No Results</h3>
+                  }
+                </>
+                :
+                <LoadingItem />
               }
+              
             </>
           : 
             <>
               <span className={`copy-emoji ${copyEmoji ? "active" : ""}`}> Copied!</span>
               {
-                emojis && emojis.slice(0, loadmore).map( ( emoji, index ) => {
-                  return(
-                    <li key={index} className='emoji-item' title={ emoji.unicodeName }>
-                      <input
-                        type="hidden"
-                        value={ emoji.character }
-                        readOnly
-                      />
-                      <CopyToClipboard
-                        text={emoji.character}
-                        onCopy={ handleCopyEmoji }
-                      >
-                        <div>{ emoji.character }</div>
-                      </CopyToClipboard>
-                    </li>
-                  )
-                })
+                emojis?.length > 0 ? 
+                <>
+                  {
+                    emojis && emojis.slice(0, loadmore).map( ( emoji, index ) => {
+                      return(
+                        <li key={index} className='emoji-item' title={ emoji.unicodeName }>
+                          <input
+                            type="hidden"
+                            value={ emoji.character }
+                            readOnly
+                          />
+                          <CopyToClipboard
+                            text={emoji.character}
+                            onCopy={ handleCopyEmoji }
+                          >
+                            <div>{ emoji.character }</div>
+                          </CopyToClipboard>
+                        </li>
+                      )
+                    })
+                  }
+                  {
+                    loadmore < emojis?.length && (
+                      <h4 className='loadmore' onClick={loadMore}>Load More</h4>
+                    )
+                  }
+                </>
+                :
+                <LoadingItem />
               }
-              {
-                loadmore < emojis?.length && (
-                  <h4 className='loadmore' onClick={loadMore}>Load More</h4>
-                )
-              }
+              
               
             </>
         }
